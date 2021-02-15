@@ -65,47 +65,22 @@ struct Calculadora {
     }
 };
 
-// erro porque as pilhas estao vazias
-TEST_CASE("Teste vazio") {
+// soma simples
+TEST_CASE("1+1") {
     Calculadora<int> c;
     c.cria();
-    REQUIRE(c.fim() == false);
-}
-
-
-// apenas um numero, entao OK
-TEST_CASE("Casos simples") {
-    Calculadora<int> c;
-    c.cria();
-    c.operando(1);
+    c.formula("1+1");
     REQUIRE(c.fim() == true);
-    REQUIRE(c.resultado() == 1);
+    REQUIRE(c.resultado() == 2);
 }
 
-// dois numeros sem operador e um erro
-TEST_CASE("1 2") {
+// subtracao simples
+TEST_CASE("3-1") {
     Calculadora<int> c;
     c.cria();
-    c.operando(1);
-    c.operando(2);
-    REQUIRE(c.fim() == false);
-}
-
-// falta um numero nesse calculo
-TEST_CASE("1+ = erro") {
-    Calculadora<int> c;
-    c.cria();
-    c.operando(1);
-    c.operador('+');
-    REQUIRE(c.fim() == false);
-}
-
-// erro de formula
-TEST_CASE("3* = erro") {
-    Calculadora<int> c;
-    c.cria();
-    c.formula("3*");
-    REQUIRE(c.fim() == false);
+    c.formula("3-1");
+    REQUIRE(c.fim() == true);
+    REQUIRE(c.resultado() == 2);
 }
 
 // soma simples
@@ -180,43 +155,3 @@ TEST_CASE("(3+1)*(4+7)+3-1 = 46") {
     REQUIRE(c.resultado() == 46);
 }
 
-// parentesis errado
-TEST_CASE("4+(1+2 = erro") {
-    Calculadora<int> c;
-    c.cria();
-    c.formula("4+(1+2");
-    REQUIRE(c.fim() == false);
-}
-
-// parentesis errado
-TEST_CASE("4+(1+2)+1) = erro") {
-    Calculadora<int> c;
-    c.cria();
-    c.formula("4+(1+2)+1)");
-    REQUIRE(c.fim() == false);
-}
-
-TEST_CASE("3.1+5.7-3.3 = 5.5") {
-    Calculadora<float> c;
-    c.cria();
-    c.formula("3.1+5.7-3.3");
-    REQUIRE(c.fim() == true);
-    REQUIRE(c.resultado() == 5.5);
-}
-
-
-TEST_CASE("7/4+1 = 2.75") {
-    Calculadora<float> c;
-    c.cria();
-    c.formula("7/4+1");
-    REQUIRE(c.fim() == true);
-    REQUIRE(c.resultado() == 2.75);
-}
-
-TEST_CASE("3.3*2+7.796 = 14.396") {
-    Calculadora<float> c;
-    c.cria();
-    c.formula("3.3*2+7.796");
-    REQUIRE(c.fim() == true);
-    REQUIRE(c.resultado() == 14.396);
-}
